@@ -26,7 +26,7 @@
 ---
 
 ## Examples of Application 
-- welcome message
+- display of welcome message
 
   Welcome to Snake and Ladder Game.
    Developed by: Manjunath AG
@@ -34,7 +34,8 @@
         Select Snake and Ladder data-type:
         --> Enter 1 to select default values for snake and ladder.
         --> Enter 2 to give values manually.
-- winner message
+
+- display of winner message
 
     Nithya is playing
     Nithya rolled a 3 and moved from the position 77 to the position 80
@@ -51,4 +52,4 @@
     Nithya has won the game, Hurray!!!
     
 
-
+---
