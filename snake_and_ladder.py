@@ -1,5 +1,7 @@
 # snake and ladder application
-import random 
+import random
+# colorama is inbuilt module for color text in console
+from colorama import Fore, Back
 
 # class game is assigned with all the functinality of game.
 class Game:
@@ -9,11 +11,12 @@ class Game:
         Welcome to Snake and Ladder Game.
         Developed by: Manjunath AG
 
-        Snake and Ladder values:
+        Select Snake and Ladder data-type:
         --> Enter 1 to select default values for snake and ladder.
         --> Enter 2 to give values manually.
+
         """
-    print(message)
+    print(Fore.LIGHTCYAN_EX + message)
 
     # snake and ladder positions
     # default values to snake 
@@ -21,7 +24,8 @@ class Game:
     # key is head position of snake
     # value is tail position of snake
     # Therefore (value < key) 
-    option=int(input())
+    option=int(input('\t'))
+    print('\n')
     if option == 1:
         snakes = {
             17:7,
@@ -65,7 +69,7 @@ class Game:
             the end position of the ladder and the piece should go up or down accordingly.
         --> Snake and Ladder do not form an infinite loop.
         """
-        print(message)
+        print(message+'\n')
         no_of_snakes = int(input('Enter total number of snakes in the game '))
         print('Head position of snake should be greater than Tail position of the snake')
 
@@ -107,57 +111,57 @@ class Game:
     def play(self):
         while (self.player_one_final_position <= 100 or self.player_two_final_position <= 100) :
         # player one rolls the dice 
-            print(self.player_one_name +' is playing')
+            print(Fore.LIGHTMAGENTA_EX +self.player_one_name +' is playing')
             dice_value = random.choice([1,2,3,4,5,6])
             if self.player_one_final_position + dice_value <= 100 :
                 self.player_one_final_position = self.player_one_final_position + dice_value
-                print(self.player_one_name + ' rolled a '+str(dice_value)+' and moved from the position '+str(self.player_one_initial_position)+' to the position '+str(self.player_one_final_position))
+                print(Fore.LIGHTMAGENTA_EX +self.player_one_name + ' rolled a '+str(dice_value)+' and moved from the position '+str(self.player_one_initial_position)+' to the position '+str(self.player_one_final_position)+'\n')
                 self.player_one_initial_position = self.player_one_final_position
 
             # snake bite checking 
             if self.player_one_initial_position in self.snakes.keys():
-                print('oh no......!!!!!!!, '+self.player_one_name+' got snake-bite by '+str(self.snakes[self.player_one_initial_position])+' positions')
+                print(Fore.LIGHTRED_EX + 'oh no......!!!!!!!, '+self.player_one_name+' got snake-bite by '+str(self.snakes[self.player_one_initial_position])+' positions')
                 self.player_one_final_position = self.snakes[self.player_one_initial_position]
-                print(self.player_one_name+' moved down to '+str(self.player_one_final_position)+' position due to snake bite')
+                print(Fore.LIGHTRED_EX + self.player_one_name+' moved down to '+str(self.player_one_final_position)+' position due to snake bite'+'\n')
                 self.player_one_initial_position = self.player_one_final_position
 
             # ladder luck checking
             if self.player_one_initial_position in self.ladders.keys():
-                print('woo-hoo..!!, '+self.player_one_name+' got lucky to climb ladder to '+str(self.ladders[self.player_one_initial_position])+' position')
+                print(Fore.LIGHTGREEN_EX +'woo-hoo..!!, '+self.player_one_name+' got lucky to climb ladder to '+str(self.ladders[self.player_one_initial_position])+' position')
                 self.player_one_final_position = self.ladders[self.player_one_initial_position]
-                print(self.player_one_name+' moved up to '+str(self.player_one_final_position)+' position due to ladder')
+                print(Fore.LIGHTGREEN_EX +self.player_one_name+' moved up to '+str(self.player_one_final_position)+' position due to ladder'+'\n')
                 self.player_one_initial_position = self.player_one_final_position
 
             # checking for winner 
             if (self.player_one_final_position == self.player_one_initial_position == 100) :
-                print(self.player_one_name+' has won the game')
+                print(Fore.LIGHTGREEN_EX + Back.RED +self.player_one_name+' has won the game, Hurray!!!')
                 break 
             
 
         # player two rolls the dice
-            print(self.player_two_name +' is playing')
+            print(Fore.LIGHTYELLOW_EX +self.player_two_name +' is playing')
             dice_value = random.choice([1,2,3,4,5,6])
             if self.player_two_final_position + dice_value <= 100 :
                 self.player_two_final_position = self.player_two_final_position + dice_value
-                print(self.player_two_name + ' rolled a '+str(dice_value)+' and moved from the position '+str(self.player_two_initial_position)+' to the position '+str(self.player_two_final_position))
+                print(Fore.LIGHTYELLOW_EX +self.player_two_name + ' rolled a '+str(dice_value)+' and moved from the position '+str(self.player_two_initial_position)+' to the position '+str(self.player_two_final_position)+'\n')
                 self.player_two_initial_position = self.player_two_final_position
 
             # snake bite checking 
             if self.player_two_initial_position in self.snakes.keys():
-                print('oh no......!!!!!!!, '+self.player_two_name+' got snake-bite by '+str(self.snakes[self.player_two_initial_position])+' positions')
+                print(Fore.LIGHTRED_EX + 'oh no......!!!!!!!, '+self.player_two_name+' got snake-bite by '+str(self.snakes[self.player_two_initial_position])+' positions')
                 self.player_two_final_position = self.snakes[self.player_two_initial_position]
-                print(self.player_two_name+' moved down to '+str(self.player_two_final_position)+' position due to snake bite')
+                print(Fore.LIGHTRED_EX + self.player_two_name+' moved down to '+str(self.player_two_final_position)+' position due to snake bite'+'\n')
                 self.player_two_initial_position = self.player_two_final_position
 
             # ladder luck checking
             if self.player_two_initial_position in self.ladders.keys():
-                print('woo-hoo..!!, '+self.player_two_name+' got lucky to climb ladder to '+str(self.ladders[self.player_two_initial_position])+' position')
+                print(Fore.LIGHTGREEN_EX +'woo-hoo..!!, '+self.player_two_name+' got lucky to climb ladder to '+str(self.ladders[self.player_two_initial_position])+' position')
                 self.player_two_final_position = self.ladders[self.player_two_initial_position]
-                print(self.player_two_name+' moved up to '+str(self.player_two_final_position)+' position due to ladder')
+                print(Fore.LIGHTGREEN_EX +self.player_two_name+' moved up to '+str(self.player_two_final_position)+' position due to ladder'+'\n')
                 self.player_two_initial_position = self.player_two_final_position
 
             # checking for winner
             if (self.player_two_final_position == self.player_two_initial_position == 100) :
-                print(self.player_two_name+' has won the game')
+                print(Fore.LIGHTGREEN_EX +Back.RED+self.player_two_name+' has won the game, Hurray!!!')
                 break 
 
