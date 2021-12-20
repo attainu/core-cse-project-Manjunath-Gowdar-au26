@@ -161,17 +161,3 @@ class Game:
                 print(self.player_two_name+' has won the game')
                 break 
 
-
-
-# function start will create instance of the call game and call's the method.
-def start():
-    # creating isinstance of the class Game
-    game_one = Game()
-
-    # running the game 
-    input('Hit enter to start the game')
-    game_one.play()
-
-
-# calling the function start 
-start()
