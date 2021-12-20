@@ -15,9 +15,9 @@ print(message)
 # snake and ladder positions
 # default values to snake 
 
-# key is tail position of snake
-# value is head position of snake
-# Therefore value > key 
+# key is head position of snake
+# value is tail position of snake
+# Therefore (value < key) 
 option=int(input())
 if option == 1:
     snakes = {
@@ -52,11 +52,21 @@ if option == 1:
     player_two_initial_position = 0
     player_two_final_position = 0
 
-# manual data entry for snakes
+# manual data entry for snakes and ladder
 elif option == 2 :
+    message = """
+    Rules to follow for snake positions and ladder positions.
+    --> There won't be a snake or ladder at 100.
+    --> snake and ladder positions shouldn't exceed 100.
+    --> There won't be multiple snake or ladder at the tail of the snake, or
+        the end position of the ladder and the piece should go up or down accordingly.
+    --> Snake and Ladder do not form an infinite loop.
+    """
+    print(message)
     no_of_snakes = int(input('Enter total number of snakes in the game '))
     print('Head position of snake should be greater than Tail position of the snake')
 
+# manual data entry for snake
     snakes = {}
     for i in range(no_of_snakes):
         key=int(input('Enter Head position of snake '+ str(i+1)+'\t'))
@@ -67,7 +77,7 @@ elif option == 2 :
             print('Invalid input, Head position of snake should be greater than Tail position of the snake')
             break
     
-    # manual data entry for ladder
+# manual data entry for ladder
     no_of_ladders = int(input('Enter total number of ladders in the game '))
     print('Starting position of the ladder should be lesser than the Ending position of the ladder')
 
@@ -89,28 +99,59 @@ elif option == 2 :
     player_two_initial_position = 0
     player_two_final_position = 0
 
-
+input('hit enter to start the game')
 while (player_one_final_position <= 100 or player_two_final_position <= 100) :
-    # player one rolls the dice 
+# player one rolls the dice 
     print(player_one_name +' is playing')
     dice_value = random.choice([1,2,3,4,5,6])
     if player_one_final_position+dice_value <= 100 :
         player_one_final_position = player_one_final_position + dice_value
         print(player_one_name + ' rolled a '+str(dice_value)+' and moved from the position '+str(player_one_initial_position)+' to the position '+str(player_one_final_position))
         player_one_initial_position = player_one_final_position
-    # if player_one_initial_position in snakes.keys
+
+    # snake bite checking 
+    if player_one_initial_position in snakes.keys():
+        print('oh no......!!!!!!!, '+player_one_name+' got snake-bite by '+str(snakes[player_one_initial_position])+' positions')
+        player_one_final_position = snakes[player_one_initial_position]
+        print(player_one_name+' moved down to '+str(player_one_final_position)+' position due to snake bite')
+        player_one_initial_position = player_one_final_position
+
+    # ladder luck checking
+    if player_one_initial_position in ladders.keys():
+        print('woo-hoo..!!, '+player_one_name+' got lucky to climb ladder to '+str(ladders[player_one_initial_position])+' position')
+        player_one_final_position = ladders[player_one_initial_position]
+        print(player_one_name+' moved up to '+str(player_one_final_position)+' position due to ladder')
+        player_one_initial_position = player_one_final_position
+
+    # checking for winner 
     if (player_one_final_position == player_one_initial_position == 100) :
         print(player_one_name+' has won the game')
         break 
     
 
-    # player two rolls the dice
+# player two rolls the dice
     print(player_two_name +' is playing')
     dice_value = random.choice([1,2,3,4,5,6])
     if player_two_final_position+dice_value <= 100 :
         player_two_final_position = player_two_final_position + dice_value
         print(player_two_name + ' rolled a '+str(dice_value)+' and moved from the position '+str(player_two_initial_position)+' to the position '+str(player_two_final_position))
         player_two_initial_position = player_two_final_position
+
+    # snake bite checking 
+    if player_two_initial_position in snakes.keys():
+        print('oh no......!!!!!!!, '+player_two_name+' got snake-bite by '+str(snakes[player_two_initial_position])+' positions')
+        player_two_final_position = snakes[player_two_initial_position]
+        print(player_two_name+' moved down to '+str(player_two_final_position)+' position due to snake bite')
+        player_two_initial_position = player_two_final_position
+
+    # ladder luck checking
+    if player_two_initial_position in ladders.keys():
+        print('woo-hoo..!!, '+player_two_name+' got lucky to climb ladder to '+str(ladders[player_two_initial_position])+' position')
+        player_two_final_position = ladders[player_two_initial_position]
+        print(player_two_name+' moved up to '+str(player_two_final_position)+' position due to ladder')
+        player_two_initial_position = player_two_final_position
+
+    # checking for winner
     if (player_two_final_position == player_two_initial_position == 100) :
         print(player_two_name+' has won the game')
         break 
