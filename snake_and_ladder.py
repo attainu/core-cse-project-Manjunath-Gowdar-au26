@@ -23,7 +23,7 @@ class Game:
 
     # key is head position of snake
     # value is tail position of snake
-    # Therefore (value < key) 
+    # Therefore (key > value) 
     option=int(input('\t'))
     print('\n')
     if option == 1:
@@ -40,7 +40,7 @@ class Game:
 
     # key is starting position of ladder
     # value is ending position of ladder
-    # Therefore value > key 
+    # Therefore (key < value)
         ladders = {
             1:38,
             4:14,
